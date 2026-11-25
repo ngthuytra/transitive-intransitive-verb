@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transitive and Intransitive Verbs – Practice</title>
+<style>
+:root{--navy:#203a5f;--blue:#315f91;--pale:#eef4fb;--ink:#243247;--muted:#65758b;--line:#d8e1ec;--green:#18794e;--red:#b42318;--gold:#fff7df}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f7fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+.container{max-width:1000px;margin:32px auto;padding:0 18px 50px}
+header{background:linear-gradient(135deg,#203a5f,#4776a8);color:white;padding:30px 32px;border-radius:18px;margin-bottom:22px;box-shadow:0 8px 24px #203a5f20}
+header .eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+h1{font-size:clamp(25px,4vw,36px);line-height:1.2;margin:8px 0}
+header p{margin:8px 0 0;opacity:.9}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:24px;margin:18px 0;box-shadow:0 3px 12px #203a5f08}
+h2{font-size:21px;color:var(--navy);margin:0 0 8px}
+.instruction{color:var(--muted);margin:0 0 18px}
+.word-bank{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 20px}
+.word{background:var(--pale);border:1px solid #d9e6f4;border-radius:9px;padding:6px 11px;font-style:italic;font-weight:600;color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.column{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.column h3{background:var(--pale);color:var(--navy);font-size:15px;text-align:center;margin:0;padding:12px 8px;min-height:48px}
+.column .inside{padding:12px}
+select,input[type=text]{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:10px 11px;font:inherit;color:var(--ink);background:white}
+select:focus,input:focus{outline:2px solid #9fc2e8;border-color:var(--blue)}
+.word-row{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:8px;margin:8px 0}
+.word-row label{font-style:italic;font-weight:600}
+.question{padding:11px 0;border-bottom:1px solid #edf1f6}
+.question:last-child{border-bottom:0}
+.qline{display:flex;gap:9px;align-items:flex-start}
+.num{font-weight:700;color:var(--blue);min-width:23px}
+.qtext{flex:1}
+.answer-input{margin:8px 0 2px 32px;max-width:650px}
+.inline-options{display:flex;gap:15px;flex-wrap:wrap;margin:9px 0 0 32px}
+.inline-options label{display:flex;align-items:center;gap:5px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+button{border:0;border-radius:9px;padding:11px 17px;font-weight:700;cursor:pointer;font-size:14px}
+.check{background:var(--navy);color:white}
+.reveal{background:#eaf0f7;color:var(--navy)}
+.reset{background:#f1f3f6;color:#455468}
+button:hover{filter:brightness(.96)}
+.result{margin-top:13px;padding:11px 14px;border-radius:9px;background:var(--pale);font-weight:700;display:none}
+.result.show{display:block}
+.feedback{font-size:13px;margin:5px 0 0 32px}
+.correct{color:var(--green)} .incorrect{color:var(--red)}
+.answer-key{display:none;background:#f7fafc;border:1px dashed #b8c9dc;padding:14px;border-radius:10px;margin-top:14px}
+.answer-key.show{display:block}
+.answer-key ol{margin:6px 0 0;padding-left:22px}
+.note{background:var(--gold);border-left:4px solid #e2b84f;padding:12px 15px;border-radius:8px;margin-top:14px;font-size:14px}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:25px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.panel{padding:17px}header{padding:24px 20px}.word-row{grid-template-columns:80px 1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="eyebrow">Grammar practice</div>
+  <h1>Transitive and Intransitive Verbs</h1>
+  <p>Complete the exercises and check your answers instantly.</p>
+</header>
+
+<section class="panel" id="part1">
+<h2>I. Put the verbs in the correct column</h2>
+<p class="instruction">Choose whether each verb is transitive, intransitive, or can be either transitive or intransitive.</p>
+<div class="word-bank">
+<span class="word">sleep</span><span class="word">answer</span><span class="word">park</span><span class="word">read</span>
+<span class="word">give</span><span class="word">buy</span><span class="word">happen</span><span class="word">move</span>
+<span class="word">arrive</span><span class="word">live</span><span class="word">shake</span><span class="word">rise</span>
+<span class="word">ring</span><span class="word">tell</span><span class="word">explain</span><span class="word">win</span>
+<span class="word">burn</span><span class="word">drop</span><span class="word">occur</span><span class="word">exist</span>
+</div>
+<div class="grid">
+  <div class="column"><h3>Transitive</h3><div class="inside" id="col-t"></div></div>
+  <div class="column"><h3>Intransitive</h3><div class="inside" id="col-i"></div></div>
+  <div class="column"><h3>Either transitive or intransitive</h3><div class="inside" id="col-e"></div></div>
+</div>
+<div class="actions"><button class="check" onclick="checkPart1()">Check answers</button><button class="reveal" onclick="showKey('key1')">Show answer key</button><button class="reset" onclick="resetPart1()">Reset</button></div>
+<div class="result" id="result1"></div>
+<div class="answer-key" id="key1"><b>Suggested answers</b>
+<p><b>Transitive:</b> answer, park, give, buy, tell, explain, drop.</p>
+<p><b>Intransitive:</b> sleep, happen, arrive, live, rise, occur, exist.</p>
+<p><b>Either:</b> read, move, shake, ring, win, burn.</p>
+<div class="note">Some verbs can be used in more than one way depending on context. This exercise follows the intended grouping of the worksheet.</div></div>
+</section>
+
+<section class="panel" id="part2">
+<h2>II. Complete each sentence with a suitable verb</h2>
+<p class="instruction">Use each verb in the box once. Put the verbs in the correct tense.</p>
+<div class="word-bank">
+<span class="word">burn</span><span class="word">win</span><span class="word">live</span><span class="word">give</span>
+<span class="word">tell</span><span class="word">drink</span><span class="word">explain</span><span class="word">ring</span>
+</div>
+<div id="part2-questions"></div>
+<div class="actions"><button class="check" onclick="checkTextPart('part2')">Check answers</button><button class="reveal" onclick="showKey('key2')">Show answer key</button><button class="reset" onclick="resetTextPart('part2')">Reset</button></div>
+<div class="result" id="result-part2"></div>
+<div class="answer-key" id="key2"><b>Answer key</b><ol>
+<li>have lived</li><li>rang</li><li>has been drinking</li><li>would have won</li><li>explained</li><li>gave</li><li>was burning</li><li>will be told</li>
+</ol></div>
+</section>
+
+<section class="panel" id="part3a">
+<h2>III. A. Identify the verbs</h2>
+<p class="instruction">Write T if the verb is transitive and I if it is intransitive.</p>
+<div id="part3a-questions"></div>
+<div class="actions"><button class="check" onclick="checkChoicePart()">Check answers</button><button class="reveal" onclick="showKey('key3a')">Show answer key</button><button class="reset" onclick="resetChoicePart()">Reset</button></div>
+<div class="result" id="result3a"></div>
+<div class="answer-key" id="key3a"><b>Answer key:</b> 1. T · 2. I · 3. T · 4. I · 5. T · 6. I · 7. I · 8. I · 9. T · 10. I · 11. I · 12. T.</div>
+</section>
+
+<section class="panel" id="part3b">
+<h2>III. B. Change the sentences that have objects into the passive voice</h2>
+<p class="instruction">Write the complete passive sentence. There are five sentences with direct objects.</p>
+<div id="part3b-questions"></div>
+<div class="actions"><button class="check" onclick="checkPassivePart()">Check answers</button><button class="reveal" onclick="showKey('key3b')">Show answer key</button><button class="reset" onclick="resetInputs('part3b')">Reset</button></div>
+<div class="result" id="result3b"></div>
+<div class="answer-key" id="key3b"><b>Suggested answers</b><ol>
+<li>The food will be prepared by the chef.</li>
+<li>The fire wasn't caused by lightning.</li>
+<li>The subway is ridden by thousands of people every day.</li>
+<li>All their belongings were burnt by the fire.</li>
+<li>His project will have been finished by John when we arrive next month.</li>
+</ol><div class="note">The passive sentences may also be written without the agent (by + doer) when it is not important.</div></div>
+</section>
+
+<section class="panel" id="part4">
+<h2>IV. Rewrite the sentences in the passive voice</h2>
+<p class="instruction">Use the words in brackets. Pay attention to the tense and the time expression.</p>
+<div id="part4-questions"></div>
+<div class="actions"><button class="check" onclick="checkPart4()">Check answers</button><button class="reveal" onclick="showKey('key4')">Show answer key</button><button class="reset" onclick="resetInputs('part4')">Reset</button></div>
+<div class="result" id="result4"></div>
+<div class="answer-key" id="key4"><b>Answer key</b><ol>
+<li>The floor hasn't been cleaned yet.</li>
+<li>The politician is being interviewed now.</li>
+<li>The Mona Lisa was painted by Leonardo da Vinci.</li>
+<li>My flat was burgled last night.</li>
+<li>All tickets had been sold before we got there.</li>
+<li>The dog hasn't been fed yet.</li>
+<li>The presents are being wrapped now.</li>
+<li>The prizes will be awarded by the President tomorrow.</li>
+<li>Tea is grown in India.</li>
+<li>The prisoners are being taken to prison now.</li>
+</ol></div>
+</section>
+<section class="panel" id="final-score">
+<h2>Final score</h2>
+<p class="instruction">Your overall result will appear here after you check your answers in all five sections.</p>
+<div class="result show" id="overall-result">No scores recorded yet.</div>
+<div id="score-breakdown" style="margin-top:12px;color:var(--muted);font-size:14px"></div>
+</section>
+<footer>Transitive and Intransitive Verbs · Interactive Grammar Worksheet</footer>
+</div>
+<script>
+const part2 = [
+"We __________ here for 40 years.",
+"I __________ the bell, but no one answered it.",
+"William __________ too much recently, which makes his parent really worried.",
+"If you had played for us, we __________ the game.",
+"Gerald __________ the situation to me, but I couldn't understand it at all.",
+"The firm __________ him a gold watch when he retired.",
+"The fire __________ furiously, but the fire brigade put it out.",
+"The truth __________ to you soon."
+];
+const part2Answers = [["have lived","'ve lived"],["rang"],["has been drinking","has drunk"],["would have won"],["explained"],["gave"],["was burning","burned"],["will be told"]];
+const part3a = [
+"The chef will prepare the food.","John is working at the bakery.","Lightning didn't cause the fire.",
+"We walked downtown after work yesterday.","Thousands of people ride the subway every day.",
+"The baby was crying in the room.","Joe fell down on his way to school this morning.",
+"Our houseguests are going to arrive tomorrow afternoon.","The fire burnt all their belongings.",
+"What happened in class yesterday?","That athlete finished 12 seconds outside the world record.",
+"John will have finished his project when we arrive next month."
+];
+const part4 = [
+"(The floor / not clean / yet)","(The politician / interview / now)","(The Mona Lisa / paint / Leonardo da Vinci)",
+"(My flat / burgle / last night)","(All tickets / sell / before we got there)","(The dog / not feed / yet)",
+"(The presents / wrap / now)","(The prizes / award / President / tomorrow)","(Tea / grow / India)",
+"(The prisoners / take / to prison / now)"
+];
+const part4Answers = [
+["the floor hasn't been cleaned yet"],["the politician is being interviewed now"],
+["the mona lisa was painted by leonardo da vinci"],["my flat was burgled last night"],
+["all tickets had been sold before we got there"],["the dog hasn't been fed yet"],
+["the presents are being wrapped now"],["the prizes will be awarded by the president tomorrow"],
+["tea is grown in india"],["the prisoners are being taken to prison now"]
+];
+const part3bQuestions = [
+"1. The chef will prepare the food.","2. Lightning didn't cause the fire.",
+"3. Thousands of people ride the subway every day.","4. The fire burnt all their belongings.",
+"5. John will have finished his project when we arrive next month."
+];
+const part3bAnswers = [
+["the food will be prepared by the chef","the food will be prepared"],
+["the fire wasn't caused by lightning","the fire was not caused by lightning"],
+["the subway is ridden by thousands of people every day","the subway is ridden every day by thousands of people"],
+["all their belongings were burnt by the fire","all their belongings were burned by the fire","all their belongings were burnt"],
+["his project will have been finished by john when we arrive next month","his project will have been finished when we arrive next month"]
+];
+function makeInput(id,placeholder="Type your answer here..."){return `<input type="text" id="${id}" class="answer-input" placeholder="${placeholder}" autocomplete="off">`}
+document.getElementById("part2-questions").innerHTML=part2.map((q,i)=>`<div class="question"><div class="qline"><span class="num">${i+1}.</span><span class="qtext">${q}</span></div>${makeInput("p2_"+i)}<div class="feedback" id="fb_p2_${i}"></div></div>`).join("");
+document.getElementById("part3a-questions").innerHTML=part3a.map((q,i)=>`<div class="question"><div class="qline"><span class="num">${i+1}.</span><span class="qtext">${q}</span></div><div class="inline-options"><label><input type="radio" name="p3a_${i}" value="T"> T</label><label><input type="radio" name="p3a_${i}" value="I"> I</label></div><div class="feedback" id="fb_p3a_${i}"></div></div>`).join("");
+document.getElementById("part3b-questions").innerHTML=part3bQuestions.map((q,i)=>`<div class="question"><div class="qline"><span class="num">${i+1}.</span><span class="qtext">${q}</span></div>${makeInput("p3b_"+i)}<div class="feedback" id="fb_p3b_${i}"></div></div>`).join("");
+document.getElementById("part4-questions").innerHTML=part4.map((q,i)=>`<div class="question"><div class="qline"><span class="num">${i+1}.</span><span class="qtext">${q}</span></div>${makeInput("p4_"+i)}<div class="feedback" id="fb_p4_${i}"></div></div>`).join("");
+
+const p1Words=["sleep","answer","park","read","give","buy","happen","move","arrive","live","shake","rise","ring","tell","explain","win","burn","drop","occur","exist"];
+const p1Key={sleep:"I",answer:"T",park:"T",read:"E",give:"T",buy:"T",happen:"I",move:"E",arrive:"I",live:"I",shake:"E",rise:"I",ring:"E",tell:"T",explain:"T",win:"E",burn:"E",drop:"T",occur:"I",exist:"I"};
+const cols=[["T","col-t"],["I","col-i"],["E","col-e"]];
+cols.forEach(([v,id])=>{document.getElementById(id).innerHTML=p1Words.map(w=>`<div class="word-row"><label>${w}</label><select id="p1_${w}"><option value="">Choose</option><option value="T">Transitive</option><option value="I">Intransitive</option><option value="E">Either</option></select></div>`).join("")});
+function checkPart1(){let n=0;p1Words.forEach(w=>{let el=document.getElementById("p1_"+w);el.style.borderColor=el.value===p1Key[w]?"#18794e":el.value?"#b42318":"#cbd5e1";if(el.value===p1Key[w])n++});showResult("result1",n,p1Words.length)}
+function resetPart1(){p1Words.forEach(w=>{let e=document.getElementById("p1_"+w);e.value="";e.style.borderColor="#cbd5e1"});hideResult("result1");delete recordedScores.result1;updateOverallScore()}
+function norm(s){return s.toLowerCase().replace(/[’']/g,"'").replace(/[.,!?]/g,"").replace(/\s+/g," ").trim()}
+function checkTextPart(id){let n=0;part2Answers.forEach((answers,i)=>{let val=norm(document.getElementById("p2_"+i).value);let ok=answers.some(a=>norm(a)===val);if(ok)n++;feedback("fb_p2_"+i,ok,answers[0])});showResult("result-part2",n,8)}
+function resetTextPart(){for(let i=0;i<8;i++){document.getElementById("p2_"+i).value="";document.getElementById("fb_p2_"+i).textContent=""}hideResult("result-part2");delete recordedScores["result-part2"];updateOverallScore()}
+function checkChoicePart(){let n=0;let keys=["T","I","T","I","T","I","I","I","T","I","I","T"];keys.forEach((a,i)=>{let v=document.querySelector(`input[name="p3a_${i}"]:checked`)?.value;let ok=v===a;if(ok)n++;feedback("fb_p3a_"+i,ok,a)});showResult("result3a",n,12)}
+function resetChoicePart(){for(let i=0;i<12;i++){document.querySelectorAll(`input[name="p3a_${i}"]`).forEach(x=>x.checked=false);document.getElementById("fb_p3a_"+i).textContent=""}hideResult("result3a");delete recordedScores.result3a;updateOverallScore()}
+function checkPassivePart(){let n=0;part3bAnswers.forEach((a,i)=>{let ok=a.map(norm).includes(norm(document.getElementById("p3b_"+i).value));if(ok)n++;feedback("fb_p3b_"+i,ok,a[0])});showResult("result3b",n,5)}
+function checkPart4(){let n=0;part4Answers.forEach((a,i)=>{let ok=a.map(norm).includes(norm(document.getElementById("p4_"+i).value));if(ok)n++;feedback("fb_p4_"+i,ok,a[0])});showResult("result4",n,10)}
+function resetInputs(prefix){let count=prefix==="part3b"?5:10;let p=prefix==="part3b"?"p3b_":"p4_";for(let i=0;i<count;i++){document.getElementById(p+i).value="";document.getElementById("fb_"+p+i).textContent=""}let id=prefix==="part3b"?"result3b":"result4";hideResult(id);delete recordedScores[id];updateOverallScore()}
+function feedback(id,ok,answer){let el=document.getElementById(id);el.className="feedback "+(ok?"correct":"incorrect");el.textContent=ok?"Correct!":("Not quite. Suggested answer: "+answer)}
+const recordedScores = {};
+const sectionNames = {
+  result1:"Part I", "result-part2":"Part II", result3a:"Part III.A",
+  result3b:"Part III.B", result4:"Part IV"
+};
+function showResult(id,n,total){
+  let e=document.getElementById(id);
+  e.textContent=`Your score: ${n}/${total} (${Math.round(n/total*100)}%)`;
+  e.classList.add("show");
+  recordedScores[id]={score:n,total:total};
+  updateOverallScore();
+}
+function updateOverallScore(){
+  const entries=Object.entries(recordedScores);
+  const earned=entries.reduce((sum,[,v])=>sum+v.score,0);
+  const possible=entries.reduce((sum,[,v])=>sum+v.total,0);
+  const done=entries.length;
+  const overall=document.getElementById("overall-result");
+  overall.textContent=done===5
+    ? `Final score: ${earned}/${possible} (${Math.round(earned/possible*100)}%)`
+    : `Progress: ${done}/5 sections checked · Current score: ${earned}/${possible} (${Math.round(earned/possible*100)}%)`;
+  document.getElementById("score-breakdown").innerHTML=entries.map(([id,v])=>
+    `<div>${sectionNames[id]}: <b>${v.score}/${v.total}</b> (${Math.round(v.score/v.total*100)}%)</div>`
+  ).join("");
+}
+function hideResult(id){document.getElementById(id).classList.remove("show")}
+function showKey(id){document.getElementById(id).classList.toggle("show")}
+</script>
+</body>
+</html>
